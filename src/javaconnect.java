@@ -27,9 +27,9 @@ public class javaconnect
            catch (Exception e)
             {
                 JOptionPane.showMessageDialog(null,e);
+                
+                System.out.println("fuck you");
                 return null;
-                
-                
             }
              
              
