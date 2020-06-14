@@ -1,3 +1,8 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +14,17 @@
  * @author kaddo
  */
 public class Login extends javax.swing.JFrame {
+    Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
 
     /**
      * Creates new form Login
      */
     public Login() {
+        super ("Login");
         initComponents();
+        conn = javaconnect.connectDB();
     }
 
     /**
@@ -46,11 +56,21 @@ public class Login extends javax.swing.JFrame {
         jButton1.setText("Login");
 
         jButton2.setText("Signup");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Password");
 
         jButton3.setText("Forgot Password ?");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 51));
@@ -122,6 +142,20 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Signup ob = new Signup();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        ForgotPassword ob = new ForgotPassword();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

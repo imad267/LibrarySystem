@@ -8,13 +8,21 @@
  *
  * @author kaddo
  */
+import java.sql.*;
+import javax.swing.JOptionPane;
 public class Signup extends javax.swing.JFrame {
+    Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
+    
 
     /**
      * Creates new form Signup
      */
     public Signup() {
+        super ("Login");
         initComponents();
+        conn = javaconnect.connectDB();
     }
 
     /**
@@ -47,10 +55,20 @@ public class Signup extends javax.swing.JFrame {
         jLabel2.setText("UserName");
 
         jButton1.setText("Create");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Name");
 
         jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What is your pet name ?", "What was your first school name ?", "what is your first crush name ?", "what is the name of the city you were born in ? ", "what is your favourite food ?", "what is your favourite drink ?", " " }));
 
@@ -69,11 +87,11 @@ public class Signup extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField2)
@@ -91,14 +109,14 @@ public class Signup extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -137,6 +155,31 @@ public class Signup extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            String sql = "insert into Account (UserName,Name,Password,Sec_Q,Answer) values (?,?,?,?,?)";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,jTextField1.getText());
+            pst.setString(2,jTextField2.getText());
+            pst.setString(3,jTextField3.getText());
+            pst.setString(4, (String) jComboBox1.getSelectedItem());
+            pst.setString(5,jTextField4.getText());
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"new account created");
+            rs.close();
+            pst.close();
+        }catch(Exception e ){
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Login ob = new Login();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

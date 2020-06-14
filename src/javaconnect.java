@@ -21,14 +21,12 @@ public class javaconnect
            try 
            {
              Class.forName("org.sqlite.JDBC");
-             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\kaddo\\OneDrive\\Documents\\NetBeansProjects\\Library Managment System\\LibraryDataBase.sqlite");
+             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\imad9\\Documents\\LibrarySystem\\LibrarySystembData.sqlit");
              return conn;
            }
            catch (Exception e)
             {
                 JOptionPane.showMessageDialog(null,e);
-                
-                System.out.println("fuck you");
                 return null;
             }
              
