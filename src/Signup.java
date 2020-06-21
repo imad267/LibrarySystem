@@ -11,9 +11,8 @@
 import java.sql.*;
 import javax.swing.JOptionPane;
 public class Signup extends javax.swing.JFrame {
-    Connection conn;
-    ResultSet rs;
-    PreparedStatement pst;
+    
+    
     
 
     /**
@@ -22,7 +21,7 @@ public class Signup extends javax.swing.JFrame {
     public Signup() {
         super ("Login");
         initComponents();
-        conn = javaconnect.connectDB();
+        
     }
 
     /**
@@ -158,17 +157,22 @@ public class Signup extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-            String sql = "insert into Account (UserName,Name,Password,Sec_Q,Answer) values (?,?,?,?,?)";
-            pst = conn.prepareStatement(sql);
-            pst.setString(1,jTextField1.getText());
-            pst.setString(2,jTextField2.getText());
-            pst.setString(3,jTextField3.getText());
-            pst.setString(4, (String) jComboBox1.getSelectedItem());
-            pst.setString(5,jTextField4.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null,"new account created");
-            rs.close();
-            pst.close();
+            conn con = new conn();
+            String sql = "insert into Account (Username,Name,Password,Sec_Q,Answer) values (?,?,?,?,?)";
+            PreparedStatement st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText());
+            st.setString(2,jTextField2.getText());
+            st.setString(3,jTextField3.getText());
+            st.setString(4, (String) jComboBox1.getSelectedItem());
+            st.setString(5,jTextField4.getText());  
+            int rs = st.executeUpdate();
+            if (rs > 0)
+                    JOptionPane.showMessageDialog(null, "User Created");
+		else
+                    JOptionPane.showMessageDialog(null, "Error");
+            
+           
+            st.close();
         }catch(Exception e ){
             
         }
