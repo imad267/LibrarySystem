@@ -16,6 +16,7 @@ import java.sql.*;
 public class conn{
     Connection c;
     Statement s;
+    ResultSet rs;
     public conn(){  
         try{  
             Class.forName("com.mysql.jdbc.Driver");  

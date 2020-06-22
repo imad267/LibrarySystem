@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,9 +15,9 @@ import java.sql.ResultSet;
  * @author kaddo
  */
 public class ForgotPassword extends javax.swing.JFrame {
-    Connection conn;
-    ResultSet rs;
-    PreparedStatement pst;
+    conn con = new conn();
+    PreparedStatement st ;
+     ResultSet rs ; 
 
     /**
      * Creates new form ForgotPassword
@@ -25,6 +26,44 @@ public class ForgotPassword extends javax.swing.JFrame {
         super ("Forgot Password");
         initComponents();
         
+    }
+    
+    public void Search(){
+        String a1= jTextField1.getText();
+        String sql = "select * from Account where Username='"+a1+"'";
+        try{
+            st = con.c.prepareStatement(sql);
+            rs = st.executeQuery();
+        if(rs.next()){
+            jTextField2.setText(rs.getString(1));
+            jTextField3.setText(rs.getString(4));
+            rs.close();
+            st.close();
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"incorrect username");
+            
+        }
+        }
+        catch(Exception e ){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    
+    public void Retrive(){
+        String a1=jTextField1.getText();
+        String a2=jTextField4.getText();
+        String sql = "select * from Account where Answer='"+a2+"'"; 
+        try{
+            st = con.c.prepareStatement(sql);
+            rs = st.executeQuery();
+            if(rs.next()){
+                jTextField5.setText(rs.getString(3));
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
     }
 
     /**
@@ -56,11 +95,21 @@ public class ForgotPassword extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204)), "Forgot Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(255, 51, 51))); // NOI18N
 
         jButton2.setText("Retrieve");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Answer");
 
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Name");
@@ -72,6 +121,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         jLabel5.setText("Password");
 
         jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Security Question");
@@ -150,6 +204,24 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Search();
+    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Retrive();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        setVisible(false);
+        Login ob = new Login();
+        ob.setVisible(true);
+         
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
