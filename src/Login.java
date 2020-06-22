@@ -2,6 +2,10 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,9 +18,9 @@ import java.sql.ResultSet;
  * @author kaddo
  */
 public class Login extends javax.swing.JFrame {
-    Connection conn;
-    ResultSet rs;
-    PreparedStatement pst;
+    conn con = new conn();
+    PreparedStatement st ;
+     ResultSet rs ; 
 
     /**
      * Creates new form Login
@@ -54,6 +58,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("UserName");
 
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Signup");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +165,41 @@ public class Login extends javax.swing.JFrame {
         ForgotPassword ob = new ForgotPassword();
         ob.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       String sql = "select * from Account where Username=? and Password=?"; 
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText());
+            st.setString(2,jPasswordField1.getText());
+            rs = st.executeQuery();
+            if(rs.next()){
+               rs.close();
+               st.close();
+               
+               setVisible(false);
+               Loading ob=new Loading();
+               ob.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Incorrect user name or password");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        } finally {
+            
+           try {
+               rs.close();
+               st.close();
+           } catch (Exception e) {
+              
+           }
+        }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
