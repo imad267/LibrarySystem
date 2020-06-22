@@ -174,7 +174,8 @@ public class Home extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
         );
 
-        setBounds(0, 0, 647, 504);
+        setSize(new java.awt.Dimension(647, 504));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
