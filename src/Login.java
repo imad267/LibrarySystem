@@ -180,6 +180,7 @@ public class Login extends javax.swing.JFrame {
                
                setVisible(false);
                Loading ob=new Loading();
+               ob.SetUpLoading();
                ob.setVisible(true);
             }
             else{
