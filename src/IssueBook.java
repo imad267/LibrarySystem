@@ -1,3 +1,9 @@
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,11 +15,15 @@
  * @author kaddo
  */
 public class IssueBook extends javax.swing.JFrame {
+    conn con = new conn();
+    PreparedStatement st ;
+    ResultSet rs ;
 
     /**
      * Creates new form IssueBook
      */
     public IssueBook() {
+        super("Issue Book");
         initComponents();
     }
 
@@ -67,6 +77,11 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel1.setText("Book ID");
 
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Price");
 
@@ -145,6 +160,11 @@ public class IssueBook extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)), "Student Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
 
         jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Course");
 
@@ -231,8 +251,18 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel14.setText("Date of Issue");
 
         jButton3.setText("Issue");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,6 +305,135 @@ public class IssueBook extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(838, 480));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Home ob = new Home();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String sql = "select * from Book where Name=?";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField2.getText());
+            rs=st.executeQuery();
+            if(rs.next()){
+                String add1 = rs.getString("Book_ID");
+                jTextField1.setText(add1);
+                
+                String add2 = rs.getString("Edition");
+                jTextField3.setText(add2);
+                
+                String add3 = rs.getString("Publicher");
+                jTextField4.setText(add3);
+                
+                String add4 = rs.getString("Price");
+                jTextField5.setText(add4);
+                
+                String add5 = rs.getString("Pages");
+                jTextField6.setText(add5);
+                
+                rs.close();
+                st.close();
+            }
+                
+                else{
+                        JOptionPane.showMessageDialog(null, "Book can't be found");
+                        }
+          
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        } finally{
+            try{
+                rs.close();
+                st.close();
+            
+        }catch(Exception e){
+            
+        }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String sql = "select * from Student where Student_ID=?";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField7.getText());
+            rs=st.executeQuery();
+            if(rs.next()){
+                String add1 = rs.getString("Name");
+                jTextField8.setText(add1);
+                
+                String add2 = rs.getString("Surname");
+                jTextField9.setText(add2);
+                
+                String add3 = rs.getString("Course");
+                jTextField10.setText(add3);
+                
+                String add4 = rs.getString("Bransh");
+                jTextField11.setText(add4);
+                
+                String add5 = rs.getString("Year");
+                jTextField12.setText(add5);
+                
+                String add6 = rs.getString("Semester");
+                jTextField13.setText(add5);
+                
+                rs.close();
+                st.close();
+            }
+                
+                else{
+                        JOptionPane.showMessageDialog(null, "Student can't be found");
+                        }
+          
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        } finally{
+            try{
+                rs.close();
+                st.close();
+            
+        }catch(Exception e){
+            
+        }
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String sql = "insert into Issue (Book_ID,Name,Edition,Publicher,Price,Pages,Student_ID,FName,LName,Course,Branch,Year,Semester,DateOfIssue) values"
+                + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText());
+            st.setString(2,jTextField2.getText());
+            st.setString(3,jTextField3.getText());
+            st.setString(4,jTextField4.getText());
+            st.setString(5,jTextField5.getText());
+            st.setString(6,jTextField6.getText());
+            st.setString(7,jTextField7.getText());
+            st.setString(8,jTextField8.getText());
+            st.setString(9,jTextField9.getText());
+            st.setString(10,jTextField10.getText());
+            st.setString(11,jTextField11.getText());
+            st.setString(12,jTextField12.getText());
+            st.setString(13,jTextField13.getText());
+            st.setString(14,((JTextField)jDateChooser1.getDateEditor().getUiComponent().getText()));
+            st.execute();
+            JOptionPane.showMessageDialog(null,"Book Issued");
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
