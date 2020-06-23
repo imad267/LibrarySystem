@@ -1,3 +1,8 @@
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,11 +14,15 @@
  * @author kaddo
  */
 public class ReturnBook extends javax.swing.JFrame {
+    conn con = new conn();
+    PreparedStatement st ;
+    ResultSet rs ;
 
     /**
      * Creates new form ReturnBook
      */
     public ReturnBook() {
+        super("Return Book");
         initComponents();
     }
 
@@ -68,6 +77,11 @@ public class ReturnBook extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Return Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(204, 0, 0))); // NOI18N
 
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Year");
 
@@ -245,6 +259,40 @@ public class ReturnBook extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(624, 475));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String sql = "select * from issue where Student_ID=?";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1, jTextField1.getText());
+            rs = st.executeQuery();
+            if(rs.next()){
+                String add1 = rs.getString("FName");
+                jTextField2.setText(add1);
+                
+                String add2 = rs.getString("LName");
+                jTextField3.setText(add1);
+                
+                String add3 = rs.getString("Course");
+                jTextField4.setText(add1);
+                
+                String add4 = rs.getString("Branch");
+                jTextField5.setText(add1);
+                
+                String add5 = rs.getString("Year");
+                jTextField6.setText(add1);
+                
+                String add6 = rs.getString("Semester");
+                jTextField7.setText(add1);
+                
+                
+            }
+            
+        }catch(Exception e ){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
