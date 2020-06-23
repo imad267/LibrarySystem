@@ -219,7 +219,7 @@ public class NewBook extends javax.swing.JFrame {
             Home ob = new Home();
             ob.setVisible(true);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null,"Some Fields are missing");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

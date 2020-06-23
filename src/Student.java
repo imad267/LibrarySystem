@@ -1,3 +1,9 @@
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Random;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +15,25 @@
  * @author kaddo
  */
 public class Student extends javax.swing.JFrame {
+    
+    conn con = new conn();
+    PreparedStatement st ;
+    ResultSet rs ;
 
     /**
      * Creates new form Student
      */
     public Student() {
+        
+       super("New Student");
         initComponents();
+        Random();
+    }
+    
+    public void Random(){
+        Random rd=new Random();
+        jTextField1.setText(""+rd.nextInt(1000+1));
+        
     }
 
     /**
@@ -48,6 +67,8 @@ public class Student extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)), "New Student", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(0, 153, 0))); // NOI18N
 
+        jTextField1.setEditable(false);
+
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         jLabel6.setText("Year");
@@ -61,6 +82,11 @@ public class Student extends javax.swing.JFrame {
         jLabel1.setText("Student ID");
 
         jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Family Name");
 
@@ -76,6 +102,11 @@ public class Student extends javax.swing.JFrame {
         });
 
         jButton1.setText("Register");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,6 +202,35 @@ public class Student extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Home ob = new Home();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String sql = "insert into Student(Student_ID,Name,Surname,Course,Bransh,Year,Semester) values(?,?,?,?,?,?,?)";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText()); 
+            st.setString(2,jTextField2.getText());
+            st.setString(3,jTextField3.getText());
+            st.setString(4,(String) jComboBox1.getSelectedItem());
+            st.setString(5,jTextField4.getText());
+            st.setString(6,(String) jComboBox2.getSelectedItem());
+            st.setString(7,(String) jComboBox3.getSelectedItem());
+            st.execute();
+            JOptionPane.showMessageDialog(null,"New Student registered");
+            setVisible(false);
+            Home ob = new Home();
+            ob.setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Some Fields are missing");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
