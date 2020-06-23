@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class ForgotPassword extends javax.swing.JFrame {
     conn con = new conn();
     PreparedStatement st ;
-     ResultSet rs ; 
+    ResultSet rs ; 
 
     /**
      * Creates new form ForgotPassword

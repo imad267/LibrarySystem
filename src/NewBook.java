@@ -1,3 +1,9 @@
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Random;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +15,24 @@
  * @author kaddo
  */
 public class NewBook extends javax.swing.JFrame {
+    conn con = new conn();
+    PreparedStatement st ;
+    ResultSet rs ; 
+
 
     /**
      * Creates new form NewBook
      */
     public NewBook() {
+        super("New Book");
         initComponents();
+        Random();
+    }
+    
+    public void Random(){
+        Random rd=new Random();
+        jTextField1.setText(""+rd.nextInt(1000+1));
+        
     }
 
     /**
@@ -47,6 +65,11 @@ public class NewBook extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204)), "New Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(51, 153, 0))); // NOI18N
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Book ID");
 
@@ -61,6 +84,7 @@ public class NewBook extends javax.swing.JFrame {
 
         jLabel3.setText("Edition");
 
+        jTextField1.setEditable(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -174,9 +198,30 @@ public class NewBook extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         Home ob = new Home();
-        setVisible(true);
+        ob.setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String sql = "insert into Book(Book_ID,Name,Edition,Publicher,Price,Pages) values (?,?,?,?,?,?)";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText()); 
+            st.setString(2,jTextField2.getText());
+            st.setString(3,(String)jComboBox1.getSelectedItem());
+            st.setString(4,jTextField3.getText());
+            st.setString(5,jTextField4.getText());
+            st.setString(6,jTextField5.getText());
+            st.execute();
+            JOptionPane.showMessageDialog(null,"New book registered");
+            setVisible(false);
+            Home ob = new Home();
+            ob.setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
