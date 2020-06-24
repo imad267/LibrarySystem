@@ -69,6 +69,7 @@ public class IssueBook extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -278,13 +279,15 @@ public class IssueBook extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(161, 161, 161))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(31, 31, 31)
-                        .addComponent(jButton4)))
-                .addGap(174, 174, 174))
+                        .addComponent(jButton4)
+                        .addGap(174, 174, 174))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(164, 164, 164))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,13 +296,15 @@ public class IssueBook extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jLabel14)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(838, 480));
@@ -375,7 +380,7 @@ public class IssueBook extends javax.swing.JFrame {
                 String add3 = rs.getString("Course");
                 jTextField10.setText(add3);
                 
-                String add4 = rs.getString("Bransh");
+                String add4 = rs.getString("Branch");
                 jTextField11.setText(add4);
                 
                 String add5 = rs.getString("Year");
@@ -409,7 +414,7 @@ public class IssueBook extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String sql = "insert into Issue (Book_ID,Name,Edition,Publicher,Price,Pages,Student_ID,FName,LName,Course,Branch,Year,Semester,DateOfIssue) values"
+        String sql = "insert into IssueBook (Book_ID,Name,Edition,Publicher,Price,Pages,Student_ID,FName,LName,Course,Branch,Year,Semester,DateOfIssue) values"
                 + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             st = con.c.prepareStatement(sql);
@@ -426,7 +431,7 @@ public class IssueBook extends javax.swing.JFrame {
             st.setString(11,jTextField11.getText());
             st.setString(12,jTextField12.getText());
             st.setString(13,jTextField13.getText());
-            st.setString(14,((JTextField)jDateChooser1.getDateEditor().getUiComponent().getText()));
+            st.setString(14,((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
             st.execute();
             JOptionPane.showMessageDialog(null,"Book Issued");
             
@@ -475,6 +480,7 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

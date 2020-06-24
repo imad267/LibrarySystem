@@ -1,7 +1,11 @@
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +28,43 @@ public class ReturnBook extends javax.swing.JFrame {
     public ReturnBook() {
         super("Return Book");
         initComponents();
+    }
+    
+    public void Delete(){
+        String sql = "delete from IssueBook where Student_ID=?";
+        try{
+            st=con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText());
+            st.execute();
+        }catch(Exception e ){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void ReturnUpdate(){
+        String sql = "insert into ReturnBook (Student_ID,FName,LName,Course,Branch,Year,Semester,Book_ID,Name,Edition,Publicher,Price,Pages,DOI,DOR) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            st= con.c.prepareStatement(sql);
+            st.setString(1, jTextField1.getText());
+            st.setString(2, jTextField2.getText());
+            st.setString(3, jTextField3.getText());
+            st.setString(4, jTextField4.getText());
+            st.setString(5, jTextField5.getText());
+            st.setString(6, jTextField6.getText());
+            st.setString(7, jTextField7.getText());
+            st.setString(8, jTextField8.getText());
+            st.setString(9, jTextField9.getText());
+            st.setString(10, jTextField10.getText());
+            st.setString(11, jTextField11.getText());
+            st.setString(12, jTextField12.getText());
+            st.setString(13, jTextField13.getText());
+            st.setString(14, jTextField14.getText());
+            st.setString(15,((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
+            st.execute();
+            JOptionPane.showMessageDialog(null, "Book has been returned");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     /**
@@ -216,8 +257,18 @@ public class ReturnBook extends javax.swing.JFrame {
         );
 
         jButton2.setText("Return Book");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,7 +313,7 @@ public class ReturnBook extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String sql = "select * from issue where Student_ID=?";
+        String sql = "select * from IssueBook where Student_ID=?";
         try{
             st = con.c.prepareStatement(sql);
             st.setString(1, jTextField1.getText());
@@ -272,27 +323,77 @@ public class ReturnBook extends javax.swing.JFrame {
                 jTextField2.setText(add1);
                 
                 String add2 = rs.getString("LName");
-                jTextField3.setText(add1);
+                jTextField3.setText(add2);
                 
                 String add3 = rs.getString("Course");
-                jTextField4.setText(add1);
+                jTextField4.setText(add3);
                 
                 String add4 = rs.getString("Branch");
-                jTextField5.setText(add1);
+                jTextField5.setText(add4);
                 
                 String add5 = rs.getString("Year");
-                jTextField6.setText(add1);
+                jTextField6.setText(add5);
                 
                 String add6 = rs.getString("Semester");
-                jTextField7.setText(add1);
+                jTextField7.setText(add6);
+                
+                String add7 = rs.getString("Book_ID");
+                jTextField8.setText(add7);
+                
+                String add8 = rs.getString("Name");
+                jTextField9.setText(add8);
+                
+                String add9 = rs.getString("Edition");
+                jTextField10.setText(add9);
+                
+                String add10 = rs.getString("Publicher");
+                jTextField11.setText(add10);
+                
+                String add11 = rs.getString("Price");
+                jTextField12.setText(add11);
+                
+                String add12 = rs.getString("Pages");
+                jTextField13.setText(add12);
+                
+                String add13 = rs.getString("DateOfIssue");
+                jTextField14.setText(add13);
+                
+                rs.close();
+                st.close();
+                }
+                
+                else{
+                        JOptionPane.showMessageDialog(null,"no issued book found");
+                        }
                 
                 
-            }
+            
             
         }catch(Exception e ){
             JOptionPane.showMessageDialog(null, e);
+        }finally{
+            try{
+                rs.close();
+                st.close();
+            }catch(Exception e){
+                
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Home ob = new Home();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Delete();
+        ReturnUpdate();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

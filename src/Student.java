@@ -212,7 +212,7 @@ public class Student extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String sql = "insert into Student(Student_ID,Name,Surname,Course,Bransh,Year,Semester) values(?,?,?,?,?,?,?)";
+        String sql = "insert into Student(Student_ID,Name,Surname,Course,Branch,Year,Semester) values(?,?,?,?,?,?,?)";
         try{
             st = con.c.prepareStatement(sql);
             st.setString(1,jTextField1.getText()); 
