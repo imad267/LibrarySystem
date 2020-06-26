@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  *
  * @author kaddo
  */
-public class IssueBook extends javax.swing.JFrame {
+public class IssueBook extends javax.swing.JFrame implements IBook {
     conn con = new conn();
     PreparedStatement st ;
     ResultSet rs ;
@@ -25,6 +25,33 @@ public class IssueBook extends javax.swing.JFrame {
     public IssueBook() {
         super("Issue Book");
         initComponents();
+    }
+     @Override
+    public void IssueNew() {
+        String sql = "insert into IssueBook (Book_ID,Name,Edition,Publicher,Price,Pages,Student_ID,FName,LName,Course,Branch,Year,Semester,DateOfIssue) values"
+                + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText());
+            st.setString(2,jTextField2.getText());
+            st.setString(3,jTextField3.getText());
+            st.setString(4,jTextField4.getText());
+            st.setString(5,jTextField5.getText());
+            st.setString(6,jTextField6.getText());
+            st.setString(7,jTextField7.getText());
+            st.setString(8,jTextField8.getText());
+            st.setString(9,jTextField9.getText());
+            st.setString(10,jTextField10.getText());
+            st.setString(11,jTextField11.getText());
+            st.setString(12,jTextField12.getText());
+            st.setString(13,jTextField13.getText());
+            st.setString(14,((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
+            st.execute();
+            JOptionPane.showMessageDialog(null,"Book Issued");
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        } //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -414,30 +441,8 @@ public class IssueBook extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String sql = "insert into IssueBook (Book_ID,Name,Edition,Publicher,Price,Pages,Student_ID,FName,LName,Course,Branch,Year,Semester,DateOfIssue) values"
-                + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try{
-            st = con.c.prepareStatement(sql);
-            st.setString(1,jTextField1.getText());
-            st.setString(2,jTextField2.getText());
-            st.setString(3,jTextField3.getText());
-            st.setString(4,jTextField4.getText());
-            st.setString(5,jTextField5.getText());
-            st.setString(6,jTextField6.getText());
-            st.setString(7,jTextField7.getText());
-            st.setString(8,jTextField8.getText());
-            st.setString(9,jTextField9.getText());
-            st.setString(10,jTextField10.getText());
-            st.setString(11,jTextField11.getText());
-            st.setString(12,jTextField12.getText());
-            st.setString(13,jTextField13.getText());
-            st.setString(14,((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
-            st.execute();
-            JOptionPane.showMessageDialog(null,"Book Issued");
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+        IssueNew();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -511,4 +516,13 @@ public class IssueBook extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void CreateBook() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
+
+    
 }

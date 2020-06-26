@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author kaddo
  */
-public class NewBook extends javax.swing.JFrame {
+public class NewBook extends javax.swing.JFrame implements IBook {
     conn con = new conn();
     PreparedStatement st ;
     ResultSet rs ; 
@@ -33,6 +33,26 @@ public class NewBook extends javax.swing.JFrame {
         Random rd=new Random();
         jTextField1.setText(""+rd.nextInt(1000+1));
         
+    }
+    @Override
+    public void CreateBook() {
+         String sql = "insert into Book(Book_ID,Name,Edition,Publicher,Price,Pages) values (?,?,?,?,?,?)";
+        try{
+            st = con.c.prepareStatement(sql);
+            st.setString(1,jTextField1.getText()); 
+            st.setString(2,jTextField2.getText());
+            st.setString(3,(String)jComboBox1.getSelectedItem());
+            st.setString(4,jTextField3.getText());
+            st.setString(5,jTextField4.getText());
+            st.setString(6,jTextField5.getText());
+            st.execute();
+            JOptionPane.showMessageDialog(null,"New book registered");
+            setVisible(false);
+            Home ob = new Home();
+            ob.setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Some Fields are missing");
+        } //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -204,23 +224,7 @@ public class NewBook extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String sql = "insert into Book(Book_ID,Name,Edition,Publicher,Price,Pages) values (?,?,?,?,?,?)";
-        try{
-            st = con.c.prepareStatement(sql);
-            st.setString(1,jTextField1.getText()); 
-            st.setString(2,jTextField2.getText());
-            st.setString(3,(String)jComboBox1.getSelectedItem());
-            st.setString(4,jTextField3.getText());
-            st.setString(5,jTextField4.getText());
-            st.setString(6,jTextField5.getText());
-            st.execute();
-            JOptionPane.showMessageDialog(null,"New book registered");
-            setVisible(false);
-            Home ob = new Home();
-            ob.setVisible(true);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Some Fields are missing");
-        }
+       CreateBook();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -275,4 +279,11 @@ public class NewBook extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+
+    
+
+    @Override
+    public void IssueNew() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
