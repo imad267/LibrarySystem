@@ -35,6 +35,7 @@ public class About extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -43,10 +44,6 @@ public class About extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
         jLabel1.setText("The Developer Team");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\kaddo\\OneDrive\\Documents\\NetBeansProjects\\LibrarySystem\\images\\Imad.png")); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\kaddo\\OneDrive\\Documents\\NetBeansProjects\\LibrarySystem\\images\\Kaddour.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 0, 204));
@@ -67,6 +64,13 @@ public class About extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(153, 0, 153));
         jLabel8.setText("imad.951@hotmail.com");
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,13 +99,17 @@ public class About extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(252, 252, 252)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +131,21 @@ public class About extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addGap(93, 93, 93))
+                .addGap(41, 41, 41)
+                .addComponent(jButton1)
+                .addGap(31, 31, 31))
         );
 
         setSize(new java.awt.Dimension(887, 786));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Home ob = new Home();
+        ob.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +183,7 @@ public class About extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
