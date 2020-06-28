@@ -1,6 +1,8 @@
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,6 +15,7 @@ import java.sql.ResultSet;
  * @author kaddo
  */
 public class Statistics extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form Statistics
@@ -20,11 +23,37 @@ public class Statistics extends javax.swing.JFrame {
     
     conn con = new conn();
     PreparedStatement st ;
-     ResultSet rs ; 
+    ResultSet rs ;
+    
+
     
     public Statistics() {
         super ("Statistics");
         initComponents();
+        jTable1();
+        jTable2();
+    }
+    
+    public void jTable1(){
+        try{
+            String sql= "select Book_ID,Name,Student_ID,Fname,LName,DateOfIssue from IssueBook";
+            st=con.c.prepareStatement(sql);
+            rs=st.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    
+    public void jTable2(){
+        try{
+            String sql= "select Book_ID,Name,Student_ID,Fname,LName,DOR from ReturnBook";
+            st=con.c.prepareStatement(sql);
+            rs=st.executeQuery();
+            jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
     }
 
     /**
