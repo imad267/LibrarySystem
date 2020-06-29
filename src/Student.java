@@ -45,5 +45,17 @@ public class Student extends Subjects {
             JOptionPane.showMessageDialog(null,"Some Fields are missing");
         } //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void Delete() {
+        String sql = "Delete from Student where Student_ID=?";
+        try{
+            st=con.c.prepareStatement(sql);
+            st.setString(1,Student_ID);
+            st.execute();
+        }catch(Exception e ){
+            JOptionPane.showMessageDialog(null, e);
+        }//To change body of generated methods, choose Tools | Templates.
+    }
     
 }

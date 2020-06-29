@@ -416,7 +416,7 @@ public class IssueBook extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        bk.Book_Id=jTextField1.getText();
+        bk.Book_ID=jTextField1.getText();
         bk.Name = jTextField2.getText();
         bk.Edition = jTextField3.getText();
         bk.Publicher = jTextField4.getText();

@@ -24,8 +24,16 @@ public abstract class Subjects {
     
     public abstract void Create();
     
+    public abstract void Delete();
+    
+    public void Update(){}
+    
     public void Issue(){}
-    public void Return(){}
+    public void Return(){
+        Delete();
+        Update();
+    }
+    
     
     
     

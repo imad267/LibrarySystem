@@ -20,7 +20,7 @@ public class Book extends Subjects{
     PreparedStatement st ;
     ResultSet rs ;   
     
-    public String Book_Id ;
+    public String Book_ID ;
     
     public String Name; 
     public String Edition;
@@ -35,13 +35,14 @@ public class Book extends Subjects{
     public String Year;
     public String Semester;
     public String DateOfIssue;
+    public String DOR;
 
     @Override
     public void Create() {
         String sql = "insert into Book(Book_ID,Name,Edition,Publicher,Price,Pages) values (?,?,?,?,?,?)";
         try{
             st = con.c.prepareStatement(sql);
-            st.setString(1,Book_Id); 
+            st.setString(1,Book_ID); 
             st.setString(2,Name);
             st.setString(3,Edition);
             st.setString(4,Publicher);
@@ -60,7 +61,7 @@ public class Book extends Subjects{
                 + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             st = con.c.prepareStatement(sql);
-            st.setString(1,Book_Id); 
+            st.setString(1,Book_ID); 
             st.setString(2,Name);
             st.setString(3,Edition);
             st.setString(4,Publicher);
@@ -83,6 +84,44 @@ public class Book extends Subjects{
         
     }
     
+    @Override
+    public void Delete() {
+        String sql = "delete from IssueBook where Student_ID=?";
+        try{
+            st=con.c.prepareStatement(sql);
+            st.setString(1,Student_ID);
+            st.execute();
+        }catch(Exception e ){
+            JOptionPane.showMessageDialog(null, e);
+        } //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public void Update(){
+        String sql = "insert into ReturnBook (Student_ID,FName,LName,Course,Branch,Year,Semester,Book_ID,Name,Edition,Publicher,Price,Pages,DOI,DOR) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            st= con.c.prepareStatement(sql);
+            st.setString(1, Student_ID);
+            st.setString(2, FName);
+            st.setString(3, LName);
+            st.setString(4, Course);
+            st.setString(5, Branch);
+            st.setString(6, Year);
+            st.setString(7, Semester);
+            st.setString(8,Book_ID);
+            st.setString(9, Name);
+            st.setString(10, Edition);
+            st.setString(11, Publicher);
+            st.setString(12, Price);
+            st.setString(13, Pages);
+            st.setString(14, DateOfIssue);
+            st.setString(15,DOR);
+            st.execute();
+            JOptionPane.showMessageDialog(null, "Book has been returned");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     
     
     

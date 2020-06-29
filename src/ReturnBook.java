@@ -21,6 +21,7 @@ public class ReturnBook extends javax.swing.JFrame {
     conn con = new conn();
     PreparedStatement st ;
     ResultSet rs ;
+    Book bk = new Book();
 
     /**
      * Creates new form ReturnBook
@@ -30,42 +31,9 @@ public class ReturnBook extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void Delete(){
-        String sql = "delete from IssueBook where Student_ID=?";
-        try{
-            st=con.c.prepareStatement(sql);
-            st.setString(1,jTextField1.getText());
-            st.execute();
-        }catch(Exception e ){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
     
-    public void ReturnUpdate(){
-        String sql = "insert into ReturnBook (Student_ID,FName,LName,Course,Branch,Year,Semester,Book_ID,Name,Edition,Publicher,Price,Pages,DOI,DOR) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try {
-            st= con.c.prepareStatement(sql);
-            st.setString(1, jTextField1.getText());
-            st.setString(2, jTextField2.getText());
-            st.setString(3, jTextField3.getText());
-            st.setString(4, jTextField4.getText());
-            st.setString(5, jTextField5.getText());
-            st.setString(6, jTextField6.getText());
-            st.setString(7, jTextField7.getText());
-            st.setString(8, jTextField8.getText());
-            st.setString(9, jTextField9.getText());
-            st.setString(10, jTextField10.getText());
-            st.setString(11, jTextField11.getText());
-            st.setString(12, jTextField12.getText());
-            st.setString(13, jTextField13.getText());
-            st.setString(14, jTextField14.getText());
-            st.setString(15,((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
-            st.execute();
-            JOptionPane.showMessageDialog(null, "Book has been returned");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -391,8 +359,24 @@ public class ReturnBook extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Delete();
-        ReturnUpdate();
+        bk.Student_ID = jTextField1.getText();
+        bk.FName = jTextField2.getText();
+        bk.LName = jTextField3.getText();
+        bk.Course = jTextField4.getText();
+        bk.Branch = jTextField5.getText();
+        bk.Year = jTextField6.getText();
+        bk.Semester = jTextField7.getText();
+        bk.Book_ID = jTextField8.getText();
+        bk.Name = jTextField9.getText();
+        bk.Edition = jTextField10.getText();
+        bk.Publicher = jTextField11.getText();
+        bk.Price = jTextField12.getText();
+        bk.Pages = jTextField13.getText();
+        bk.DateOfIssue = jTextField14.getText();
+        bk.DOR = ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
+        bk.Delete();
+        bk.Return();
+        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

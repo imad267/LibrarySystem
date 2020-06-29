@@ -207,7 +207,7 @@ public class NewBook extends javax.swing.JFrame{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        bk.Book_Id = jTextField1.getText();
+        bk.Book_ID = jTextField1.getText();
         bk.Name = jTextField2.getText();
         bk.Edition = (String) jComboBox1.getSelectedItem();
         bk.Publicher = jTextField3.getText();
