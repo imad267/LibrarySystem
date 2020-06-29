@@ -14,10 +14,11 @@ import javax.swing.JTextField;
  *
  * @author kaddo
  */
-public class IssueBook extends javax.swing.JFrame implements IBook {
+public class IssueBook extends javax.swing.JFrame {
     conn con = new conn();
     PreparedStatement st ;
     ResultSet rs ;
+    Book bk = new Book();
 
     /**
      * Creates new form IssueBook
@@ -26,33 +27,7 @@ public class IssueBook extends javax.swing.JFrame implements IBook {
         super("Issue Book");
         initComponents();
     }
-     @Override
-    public void IssueNew() {
-        String sql = "insert into IssueBook (Book_ID,Name,Edition,Publicher,Price,Pages,Student_ID,FName,LName,Course,Branch,Year,Semester,DateOfIssue) values"
-                + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try{
-            st = con.c.prepareStatement(sql);
-            st.setString(1,jTextField1.getText());
-            st.setString(2,jTextField2.getText());
-            st.setString(3,jTextField3.getText());
-            st.setString(4,jTextField4.getText());
-            st.setString(5,jTextField5.getText());
-            st.setString(6,jTextField6.getText());
-            st.setString(7,jTextField7.getText());
-            st.setString(8,jTextField8.getText());
-            st.setString(9,jTextField9.getText());
-            st.setString(10,jTextField10.getText());
-            st.setString(11,jTextField11.getText());
-            st.setString(12,jTextField12.getText());
-            st.setString(13,jTextField13.getText());
-            st.setString(14,((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
-            st.execute();
-            JOptionPane.showMessageDialog(null,"Book Issued");
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        } //To change body of generated methods, choose Tools | Templates.
-    }
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -441,7 +416,23 @@ public class IssueBook extends javax.swing.JFrame implements IBook {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        IssueNew();
+        bk.Book_Id=jTextField1.getText();
+        bk.Name = jTextField2.getText();
+        bk.Edition = jTextField3.getText();
+        bk.Publicher = jTextField4.getText();
+        bk.Price = jTextField5.getText();
+        bk.Pages = jTextField6.getText();
+        bk.Student_ID = jTextField7.getText();
+        bk.FName = jTextField8.getText();
+        bk.LName = jTextField9.getText();
+        bk.Course=jTextField10.getText();
+        bk.Branch = jTextField11.getText();
+        bk.Year = jTextField12.getText();
+        bk.Semester = jTextField13.getText();
+        bk.DateOfIssue = ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
+        bk.Issue();
+        
+        
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -517,11 +508,7 @@ public class IssueBook extends javax.swing.JFrame implements IBook {
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void CreateBook() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+ 
    
 
     

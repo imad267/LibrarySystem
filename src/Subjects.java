@@ -11,12 +11,21 @@ import java.util.Random;
  *
  * @author imad9
  */
-public abstract class Subject {
+public abstract class Subjects {
+    public int ID;
     
-    public Random Random(){
+    public int set_ID(){
         Random rd=new Random();
-        return rd ;
+        this.ID = rd.nextInt(1000+1);
+        return ID;
+        
     }
+    
+    
+    public abstract void Create();
+    
+    public void Issue(){}
+    public void Return(){}
     
     
     
