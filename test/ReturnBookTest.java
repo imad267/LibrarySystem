@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author imad9
  */
-public class StudentTest {
+public class ReturnBookTest {
     
-    public StudentTest() {
+    public ReturnBookTest() {
     }
     
     @BeforeClass
@@ -37,25 +37,13 @@ public class StudentTest {
     }
 
     /**
-     * Test of Create method, of class Student.
+     * Test of main method, of class ReturnBook.
      */
     @Test
-    public void testCreate() {
-        System.out.println("Create");
-        Student instance = new Student();
-        instance.Create();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of Delete method, of class Student.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("Delete");
-        Student instance = new Student();
-        instance.Delete();
+    public void testMain() {
+        System.out.println("main");
+        String[] args = null;
+        ReturnBook.main(args);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
